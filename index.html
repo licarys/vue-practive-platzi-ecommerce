@@ -16,7 +16,7 @@
             <div class="cart-content">
                 <div class="cart-content__product">
                     <img src="" alt="">
-                    <span>Product - $ 500.000</span>
+                    <span>{{ product.name }} - $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}</span>
                 </div>
             </div>
             
@@ -32,14 +32,12 @@
                 </div>
             </section>
             <section class="description">
-                <h4>Product</h4>
+                <h4>{{ product.name }} {{product.stock === 0 ? '😥' : '😀' }}</h4>
                 <span class="badge new">New</span>
-                <span class="badge new">Offer</span>
+                <span class="badge offer">Offer</span>
                 <p class="description__status"></p>
-                <p class="description__price">$ 500.000</p>
-                <p class="product__description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                </p>
+                <p class="description__price"> $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}</p>
+                <p class="product__description">{{ product.description }}</p>
                 <div class="discount">
                     <span>Discount Code:</span>
                     <input type="text" placeholder="Enter your code">
@@ -50,6 +48,6 @@
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
-    <script></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
