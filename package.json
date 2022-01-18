@@ -1,0 +1,12 @@
+{
+  "name": "platzi-ecommerce",
+  "version": "1.0.0",
+  "description": "From Curso de Reactividad con Vue - Platzi - Escuela de Vue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx http-server ."
+  },
+  "author": "Lilibeth Sequeira <lilibeth.sequeiraj@gmail.com>",
+  "license": "MIT"
+}
