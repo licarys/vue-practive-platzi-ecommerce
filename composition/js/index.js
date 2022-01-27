@@ -18,6 +18,7 @@ const app = createApp({
                 }
             ],
             test: './images/camara.jpg',
+            quantity: 1,
             new: true,
             offer: true
         });
