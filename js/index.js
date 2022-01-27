@@ -6,21 +6,66 @@ const app = createApp({
             product: {
                 name: 'Camera',
                 price: 450000,
-                stock: 0,
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'
+                stock: 5,
+                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                images: [
+                    {
+                        image: './images/camara.jpg',
+                        thumbnail: './images/camara-thumb.jpg'
+                    },
+                    {
+                        image: './images/camara-2.jpg',
+                        thumbnail: './images/camara-2-thumb.jpg'
+                    }
+                ],
+                test: './images/camara.jpg',
+                new: true,
+                offer: true
             },
-            Images: [
+            activeImage: 1,
+            cartOpen: true,
+            cart: [
                 {
-                    image: './images/camara.png',
-                    thumbnail: './imaeges/camara-thumb.jpg'
+                    name: 'Camera',
+                    price: 450000,
+                    stock: 5,
+                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                    images: [
+                        {
+                            image: './images/camara.jpg',
+                            thumbnail: './images/camara-thumb.jpg'
+                        },
+                        {
+                            image: './images/camara-2.jpg',
+                            thumbnail: './images/camara-2-thumb.jpg'
+                        }
+                    ],
+                    test: './images/camara.jpg',
+                    new: true,
+                    offer: true
                 },
                 {
-                    image: './images/camara-2.png',
-                    thumbnail: './imaeges/camara-2-thumb.jpg'
+                    name: 'Camera 22',
+                    price: 780000,
+                    stock: 5,
+                    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+                    images: [
+                        {
+                            image: './images/camara.jpg',
+                            thumbnail: './images/camara-thumb.jpg'
+                        },
+                        {
+                            image: './images/camara-2.jpg',
+                            thumbnail: './images/camara-2-thumb.jpg'
+                        }
+                    ],
+                    test: './images/camara.jpg',
+                    new: true,
+                    offer: true
                 }
             ]
         }
-    }
+    },
 });
 
 app.mount('#app');
