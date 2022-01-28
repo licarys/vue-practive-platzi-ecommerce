@@ -69,5 +69,15 @@ const app = createApp({
             cart: [],
         }
     },
-    methods: {}
+    methods: {
+        addToCart(product){
+            const prodIndex = this.cart.findIndex(prod => prod.name === product.name);
+            if(prodIndex >= 0){
+                this.cart[prodIndex].quantity += 1;
+            }else{
+                this.cart.push(product);
+            }
+            product.stock -= 1;
+        }
+    }
 });

@@ -32,7 +32,9 @@
         <main>
             <product 
                 v-for="product in products" 
-                :key="product.name" :product="product">
+                :key="product.name" 
+                :product="product"
+                @sendtocart="addToCart">
             </product>
         </main>
 
