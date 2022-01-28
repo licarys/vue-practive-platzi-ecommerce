@@ -69,14 +69,22 @@ const app = createApp({
             cart: []
         });
 
-        setTimeout( () => {
-            activeImage.value = 1
-        }, 2000);
+        function addToCart(product){
+            const prodIndex = cartState.cart.findIndex(prod => prod.name === product.name);
+            if(prodIndex >= 0){
+                cartState.cart[prodIndex].quantity += 1;
+            }else{
+                cartState.cart.push(product);
+            }
+            product.stock -= 1;
+        }
 
         return {
             ...toRefs(cartState),
 
-            products
+            products,
+
+            addToCart
         }
     }
 });

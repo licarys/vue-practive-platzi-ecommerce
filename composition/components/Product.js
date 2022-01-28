@@ -26,16 +26,21 @@ app.component('product', {
                 <span>Discount Code:</span>
                 <input type="text" placeholder="Enter your code" @keyup.enter="applyDiscount($event)">
             </div>
-            <button :disabled="product.stock === 0" @click="addToCart()">Add to the cart</button>
+            <button :disabled="product.stock === 0" @click="sendToCart">Add to the cart</button>
         </section>
     `,
     props: ['product'],
-    setup(props){
+    emits: ['sendtocart'],
+    setup(props, context){
         const productState = reactive({
             activeImage: 0
         });
 
         const discountCodes = ref(['PLATZI', 'PLATZI20', 'LICARY']);
+
+        function sendToCart(){
+            context.emit('sendtocart', props.product);
+        }
 
         function applyDiscount(event){
             const codeEntered = event.target.value.toUpperCase();
@@ -47,20 +52,11 @@ app.component('product', {
             }
         }
 
-        function addToCart(){
-            const prodIndex = cartState.cart.findIndex(prod => prod.name === props.product.name);
-            if(prodIndex >= 0){
-                cartState.cart[prodIndex].quantity += 1;
-            }else{
-                cartState.cart.push(props.product);
-            }
-            props.product.stock -= 1;
-        }
-
         return {
             ...toRefs(productState),
+            
             applyDiscount,
-            addToCart
+            sendToCart
         }
     }
 })
