@@ -20,7 +20,7 @@ app.component('product', {
             <p class="description__status" v-else-if="product.stock === 2">Product close to sold out </p>
             <p class="description__status" v-else-if="product.stock === 1">Last unit available </p>
             <p class="description__status" v-else-if="product.stock === 0">Out of stock '😥'</p>
-            <p class="description__price"> $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}</p>
+            <p class="description__price" :style="{color: priceColor}"> $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}</p>
             <p class="product__description">{{ product.description }}</p>
             <div class="discount">
                 <span>Discount Code:</span>
@@ -33,7 +33,8 @@ app.component('product', {
     emits: ['sendtocart'],
     setup(props, context){
         const productState = reactive({
-            activeImage: 0
+            activeImage: 0,
+            priceColor: 'rgb(104, 104, 209)'
         });
 
         const discountCodes = ref(['PLATZI', 'PLATZI20', 'LICARY']);
@@ -51,6 +52,12 @@ app.component('product', {
                 discountCodes.value.splice(discountCodeIndex, 1);
             }
         }
+
+        watch(() => productState.activeImage, (stock) => {
+            if(stock < 1){
+                productState.priceColor = 'rgb(188 30 67)';
+            }
+        })
 
         return {
             ...toRefs(productState),

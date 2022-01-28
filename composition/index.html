@@ -22,9 +22,10 @@
                     <span>
                         {{ product.name }} - 
                         $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}
-                        {{ product.quantity }}
+                        ( {{ product.quantity }} )
                     </span>
                 </div>
+                <p>Total: $ {{ new Intl.NumberFormat('en-EN').format(total) }} </p>
             </div>
             
         </header>
