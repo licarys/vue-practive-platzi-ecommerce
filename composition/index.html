@@ -11,7 +11,7 @@
     <div id="app">
         <header>
             <h3>Platzi Commerce</h3>
-            <button class="cart" @click="cartOpen = !cartOpen">Cart (0)</button>
+            <button class="cart" @click="cartOpen = !cartOpen">Cart ({{ cart.length }})</button>
 
             <div class="cart-content" v-show="cartOpen">
                 <div class="cart-content__product" 
@@ -19,7 +19,11 @@
                         :key="product.name"
                         :class="{'bg-gray': index & 1}">
                     <img :src="product.images[0].image" :alt="product.name.toUpperCase()" />
-                    <span>{{ product.name }} - $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}</span>
+                    <span>
+                        {{ product.name }} - 
+                        $ {{ new Intl.NumberFormat('en-EN').format(product.price) }}
+                        {{ product.quantity }}
+                    </span>
                 </div>
             </div>
             
@@ -51,9 +55,9 @@
                 <p class="product__description">{{ product.description }}</p>
                 <div class="discount">
                     <span>Discount Code:</span>
-                    <input type="text" placeholder="Enter your code" @keyup.enter="product.price *= 50/ 100">
+                    <input type="text" placeholder="Enter your code" @keyup.enter="applyDiscount($event)">
                 </div>
-                <button :disabled="product.stock === 0" @click="product.stock -= 1">Add to the cart</button>
+                <button :disabled="product.stock === 0" @click="addToCart()">Add to the cart</button>
             </section>
         </main>
 
