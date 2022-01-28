@@ -30,8 +30,10 @@
         </header>
 
         <main>
-            <product></product>
-            <product></product>
+            <product 
+                v-for="product in products" 
+                :key="product.name" :product="product">
+            </product>
         </main>
 
     </div>

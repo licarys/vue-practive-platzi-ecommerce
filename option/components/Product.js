@@ -30,28 +30,9 @@ app.component('product', {
         <button :disabled="product.stock === 0" @click="addToCart">Add to the cart</button>
     </section>
     `,
+    props: ['product'],
     data() {
         return {
-            product: {
-                name: 'Camera',
-                price: 450000,
-                stock: 5,
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                images: [
-                    {
-                        image: './images/camara.jpg',
-                        thumbnail: './images/camara-thumb.jpg'
-                    },
-                    {
-                        image: './images/camara-2.jpg',
-                        thumbnail: './images/camara-2-thumb.jpg'
-                    }
-                ],
-                test: './images/camara.jpg',
-                quantity: 1,
-                new: true,
-                offer: true
-            },
             activeImage: 1,
             discountCodes: ['PLATZI', 'PLATZI20', 'LICARY']
         }
