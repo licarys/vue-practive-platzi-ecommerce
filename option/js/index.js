@@ -67,7 +67,6 @@ const app = createApp({
             ],
             cartOpen: true,
             cart: [],
-            total: 0
         }
     },
     methods: {
@@ -81,17 +80,14 @@ const app = createApp({
             product.stock -= 1;
         }
     }, 
-    watch:{
-        cart: {
-            handler(cart) {
-                this.total = cart.reduce((prev, curr) => {
-                  const prevPrice = prev.price || prev;
-                  const prevQuantity = prev.quantity || 1;
-                  const newTotal = prevPrice * prevQuantity + curr.price * curr.quantity;
-                  return newTotal;
-                }, 0);
-            },
-            deep: true
+    computed: {
+        total(){
+            return this.cart.reduce((prev, curr) => {
+                const prevPrice = prev.price || prev;
+                const prevQuantity = prev.quantity || 1;
+                const newTotal = prevPrice * prevQuantity + curr.price * curr.quantity;
+                return newTotal;
+            }, 0);
         }
     }
 });

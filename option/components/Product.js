@@ -35,7 +35,6 @@ app.component('product', {
         return {
             activeImage: 1,
             discountCodes: ['PLATZI', 'PLATZI20', 'LICARY'],
-            priceColor: 'rgb(104, 104, 209)'
         }
     },
     methods: {
@@ -52,11 +51,12 @@ app.component('product', {
             this.$emit('sendtocart', this.product);
         }
     },
-    watch: {
-        "product.stock"(stock){
-            if(stock < 1){
-                this.priceColor = 'rgb(188 30 67)';
+    computed: {
+        priceColor(){
+            if(this.product.stock < 1){
+                return 'rgb(188 30 67)';
             }
+            return 'rgb(104, 104, 209)'
         }
     }
 }) 
