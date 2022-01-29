@@ -1,4 +1,4 @@
-const { createApp, ref, reactive, toRefs, watch } = Vue;
+const { createApp, ref, reactive, toRefs, watch, computed } = Vue;
 
 const app = createApp({
     setup(){
@@ -67,8 +67,22 @@ const app = createApp({
         const cartState = reactive({
             cartOpen: false,
             cart: [],
-            total: 0
+            total: computed(() => {
+                return cartState.total = cartState.cart.reduce((prev, curr) => {
+                    const prevPrice = prev.price || prev;
+                    const prevQuantity = prev.quantity || 1;
+                    return prevPrice * prevQuantity + curr.price * curr.quantity;
+                }, 0);
+            })
         });
+
+        // const total = computed(()=> {
+        //     return cartState.total = cartState.cart.reduce((prev, curr) => {
+        //         const prevPrice = prev.price || prev;
+        //         const prevQuantity = prev.quantity || 1;
+        //         return prevPrice * prevQuantity + curr.price * curr.quantity;
+        //     }, 0);
+        // });
 
         function addToCart(product){
             const prodIndex = cartState.cart.findIndex(prod => prod.name === product.name);
@@ -79,20 +93,6 @@ const app = createApp({
             }
             product.stock -= 1;
         }
-
-        watch(
-            cartState.cart,
-            (value, oldValue) => {
-              cartState.total = cartState.cart.reduce((prev, curr) => {
-                const prevPrice = prev.price || prev;
-                const prevQuantity = prev.quantity || 1;
-                return prevPrice * prevQuantity + curr.price * curr.quantity;
-              }, 0);
-            }
-            /* {
-              deep: true
-            } */
-          );
 
         return {
             ...toRefs(cartState),
