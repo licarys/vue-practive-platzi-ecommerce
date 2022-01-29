@@ -33,7 +33,7 @@ app.component('product', {
     emits: ['sendtocart'],
     data() {
         return {
-            activeImage: 1,
+            activeImage: 0,
             discountCodes: ['PLATZI', 'PLATZI20', 'LICARY'],
         }
     },

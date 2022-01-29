@@ -2,68 +2,7 @@ const { createApp, ref, reactive, toRefs, watch, computed } = Vue;
 
 const app = createApp({
     setup(){
-        const products = ref([
-            {
-                name: 'Camer 1a',
-                price: 450,
-                stock: 3,
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                images: [
-                    {
-                        image: './images/camara.jpg',
-                        thumbnail: './images/camara-thumb.jpg'
-                    },
-                    {
-                        image: './images/camara-2.jpg',
-                        thumbnail: './images/camara-2-thumb.jpg'
-                    }
-                ],
-                test: './images/camara.jpg',
-                quantity: 1,
-                new: true,
-                offer: true
-            },
-            {
-                name: 'Camera 2',
-                price: 550,
-                stock: 5,
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                images: [
-                    {
-                        image: './images/camara.jpg',
-                        thumbnail: './images/camara-thumb.jpg'
-                    },
-                    {
-                        image: './images/camara-2.jpg',
-                        thumbnail: './images/camara-2-thumb.jpg'
-                    }
-                ],
-                test: './images/camara.jpg',
-                quantity: 1,
-                new: true,
-                offer: true
-            },
-            {
-                name: 'Camera 3',
-                price: 680,
-                stock: 12,
-                content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-                images: [
-                    {
-                        image: './images/camara.jpg',
-                        thumbnail: './images/camara-thumb.jpg'
-                    },
-                    {
-                        image: './images/camara-2.jpg',
-                        thumbnail: './images/camara-2-thumb.jpg'
-                    }
-                ],
-                test: './images/camara.jpg',
-                quantity: 1,
-                new: true,
-                offer: true
-            }
-        ]);
+        const products = ref([]);
         const cartState = reactive({
             cartOpen: false,
             cart: [],
@@ -76,6 +15,7 @@ const app = createApp({
             })
         });
 
+        /* Another way to use Computed props */
         // const total = computed(()=> {
         //     return cartState.total = cartState.cart.reduce((prev, curr) => {
         //         const prevPrice = prev.price || prev;
@@ -93,6 +33,13 @@ const app = createApp({
             }
             product.stock -= 1;
         }
+
+        const api = 'https://my-json-server.typicode.com/iosamuel/demo/products';
+        fetch(api)
+            .then(res=> res.json())
+            .then(data => {
+                products.value = data;
+            });
 
         return {
             ...toRefs(cartState),
